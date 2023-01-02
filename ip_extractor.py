@@ -4,13 +4,14 @@ import ipaddress
 
 input_file_path = sys.argv[1]
 output_file_path = sys.argv[2]
+service_to_extract = sys.argv[3]
 
 f = open(input_file_path)
 
 json_data = json.load(f)
 
 
-output_dict = [x for x in json_data["values"] if x["name"] == "AzureFrontDoor.Backend"]
+output_dict = [x for x in json_data["values"] if x["name"] == service_to_extract]
 
 with open(output_file_path, 'w') as writer:    
     writer.write('<ip-filter action="allow">')
